@@ -5,37 +5,30 @@ package enums;
  */
 public enum Banknote {
 
-    HUNDRED,
-    FIFTY,
-    TWENTY_FIVE,
-    TEN,
-    FIVE,
-    ONE;
+    HUNDRED(100, null),
+    FIFTY(50, HUNDRED),
+    TWENTY_FIVE(25, FIFTY),
+    TEN(10, TWENTY_FIVE),
+    FIVE(5, TEN),
+    ONE(1, FIVE);
+
+    private final int par;
+    private final Banknote next;
+
+    Banknote(int par, Banknote next){
+        this.par = par;
+        this.next = next;
+    }
 
     public int getPar(){
-        switch (this){
-            case ONE : return 1;
-            case FIVE : return 5;
-            case TEN : return 10;
-            case TWENTY_FIVE : return 25;
-            case FIFTY : return 50;
-            case HUNDRED : return 100;
-            default : return 0;
-        }
+        return par;
     }
 
     public boolean hasNext(){
-        return !this.equals(HUNDRED);
+        return next != null;
     }
 
     public Banknote getNext(){
-        switch (this){
-            case ONE : return FIVE;
-            case FIVE : return TEN;
-            case TEN : return TWENTY_FIVE;
-            case TWENTY_FIVE : return FIFTY;
-            case FIFTY : return HUNDRED;
-            default : throw new IllegalArgumentException();
-        }
+        return next;
     }
 }

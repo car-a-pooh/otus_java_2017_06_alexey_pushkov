@@ -1,15 +1,16 @@
 import enums.Banknote;
 import exceptions.AmountUnavailableException;
+import exceptions.NoMoreSpaceException;
 
 import java.util.HashMap;
 
 /**
  * Created by carapooh on 23.07.2017.
  */
-public abstract class CashDispenser implements CashHolderMediator {
-    protected HashMap<Banknote, Integer> banknoteCells = new HashMap<>();
+public abstract class CashDispenser implements CashHolder {
+    private HashMap<Banknote, Integer> banknoteCells = new HashMap<>();
     private HashMap<Banknote, Integer> initialLoad = new HashMap<>();
-    protected int maxLoad;
+    private int maxLoad;
 
     public CashDispenser(int maxLoad){
         this.maxLoad = maxLoad;
@@ -27,6 +28,23 @@ public abstract class CashDispenser implements CashHolderMediator {
         }
     }
 
+    protected boolean isFull(Banknote cell){
+        return banknoteCells.get(cell) >= maxLoad;
+    }
+
+    protected int getCellLoad(Banknote cell){
+        return banknoteCells.get(cell);
+    }
+
+    protected void setCellLoad(Banknote banknote, int quantity) throws NoMoreSpaceException {
+        if (quantity >= 0 && quantity <= maxLoad) {
+            banknoteCells.put(banknote, quantity);
+        }
+        else {
+            throw new NoMoreSpaceException();
+        }
+    }
+
     public int getBalance(){
         int balance = 0;
         for (Banknote banknote : banknoteCells.keySet()){
@@ -39,5 +57,5 @@ public abstract class CashDispenser implements CashHolderMediator {
         banknoteCells.putAll(initialLoad);
     }
 
-    public abstract HashMap<Banknote, Integer> withdraw(int amount) throws AmountUnavailableException;
+    public abstract HashMap<Banknote, Integer> withdraw(int amount) throws AmountUnavailableException, NoMoreSpaceException;
 }

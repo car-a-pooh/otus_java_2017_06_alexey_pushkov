@@ -1,21 +1,23 @@
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
  * Created by carapooh on 24.07.2017.
  */
 public class ATMDepartment {
-    private Set<CashHolderMediator> net;
+    private List<CashHolder> net;
     
     public ATMDepartment(){
-        net = new HashSet<>();
+        net = new ArrayList<>();
     }
     
-    public ATMDepartment(Set<CashHolderMediator> net){
+    public ATMDepartment(List<CashHolder> net){
         this.net = net;
     }
 
-    public void addCashHolder(CashHolderMediator cashHolder){
+    public void addCashHolder(CashHolder cashHolder){
         if (cashHolder != null){
             net.add(cashHolder);
         }
@@ -23,14 +25,14 @@ public class ATMDepartment {
 
     public int getTotalBalance(){
         int balance = 0;
-        for (CashHolderMediator holder : net){
+        for (CashHolder holder : net){
             balance += holder.getBalance();
         }
         return balance;
     }
     
     public void doEncashment(){
-        for (CashHolderMediator holder : net){
+        for (CashHolder holder : net){
             holder.goToInitialState();
         }
     }

@@ -14,19 +14,19 @@ public class LoadATM extends CashDispenser {
     }
 
     public void putBanknote(Banknote banknote) throws NoMoreSpaceException {
-        if (banknoteCells.get(banknote) < maxLoad){
-            banknoteCells.put(banknote, banknoteCells.get(banknote) + 1);
+        if (!isFull(banknote)){
+            setCellLoad(banknote, getCellLoad(banknote) + 1);
         }
         else {
             throw new NoMoreSpaceException();
         }
     }
 
-    public HashMap<Banknote, Integer> withdraw(int amount) throws AmountUnavailableException {
+    public HashMap<Banknote, Integer> withdraw(int amount) throws AmountUnavailableException, NoMoreSpaceException {
         HashMap<Banknote, Integer> candidate = new HashMap<>();
         if (tryToGatherAmount(Banknote.ONE, amount, candidate) == 0){
             for (Banknote banknote : candidate.keySet()){
-                banknoteCells.put(banknote, banknoteCells.get(banknote) -
+                setCellLoad(banknote, getCellLoad(banknote) -
                         candidate.get(banknote));
             }
             return candidate;
@@ -39,7 +39,7 @@ public class LoadATM extends CashDispenser {
     private int tryToGatherAmount(Banknote banknote, int amount,
                                       HashMap<Banknote, Integer> candidate){
         int counter = 0;
-        while (counter <= banknoteCells.get(banknote) && amount > 0) {
+        while (counter <= getCellLoad(banknote) && amount > 0) {
             int sum = -1;
 
             while (banknote.hasNext() && (sum = tryToGatherAmount(banknote.getNext(), amount, candidate)) > 0);

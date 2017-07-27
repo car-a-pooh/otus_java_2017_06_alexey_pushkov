@@ -1,5 +1,6 @@
 import enums.Banknote;
 import exceptions.AmountUnavailableException;
+import exceptions.NoMoreSpaceException;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -12,12 +13,12 @@ import java.util.Set;
 public class ATMWithdrawTest {
 
     @Test
-    public void test() throws AmountUnavailableException {
+    public void test() throws AmountUnavailableException, NoMoreSpaceException {
         Set<CashDispenser> atms = new HashSet<>();
         atms.add(new SimpleATM());
         atms.add(new LoadATM());
         for (CashDispenser cashDispenser : atms) {
-            HashMap<Banknote, Integer> wad = cashDispenser.withdraw(177);
+            HashMap<Banknote, Integer> wad = cashDispenser.withdraw(90);
             System.out.println(cashDispenser.getClass());
             for (Banknote banknote : wad.keySet()) {
                 System.out.println("Banknote " + banknote.getPar() + " : " + wad.get(banknote) + " pieces.");
