@@ -29,7 +29,11 @@ public class UserDAOTest {
         phones.add(new PhoneDataSet(23, "9988"));
         phones.add(new PhoneDataSet(24, "1122"));
         AddressDataSet address = new AddressDataSet(12L, "Red Square");
-        userDataSetDAO.saveOrUpdate(new UserDataSet(99L, "Valerian", 55, address, phones));
+        UserDataSet user = new UserDataSet(99L, "Valerian", 55, address, phones);
+        for (PhoneDataSet phone : user.getPhones()){
+            phone.setUser(user);
+        }
+        userDataSetDAO.saveOrUpdate(user);
     }
 
     @Test
@@ -37,5 +41,11 @@ public class UserDAOTest {
         UserDataSet user = userDataSetDAO.load(99L);
         Assert.assertTrue(user.getName().equals("Valerian"));
         Assert.assertTrue(user.getPhones().size() == 2);
+    }
+
+    @Test
+    public void deleteTest(){
+        UserDataSet user = userDataSetDAO.load(99L);
+        userDataSetDAO.delete(user);
     }
 }

@@ -27,6 +27,10 @@ public class UserDataSetDAO {
         dbServiceHibernate.saveOrUpdate(user);
     }
 
+    public void delete(UserDataSet user){
+        dbServiceHibernate.delete(user);
+    }
+
     public UserDataSet load(long id){
         return dbServiceHibernate.load(UserDataSet.class, id);
     }

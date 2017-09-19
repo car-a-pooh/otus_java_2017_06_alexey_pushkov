@@ -20,7 +20,8 @@ public class UserDataSet extends DataSet {
     @OneToOne(cascade = CascadeType.ALL)
     private AddressDataSet address;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,
+            targetEntity = PhoneDataSet.class, mappedBy = "user")
     private List<PhoneDataSet> phones;
 
     public UserDataSet(){

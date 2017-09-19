@@ -18,6 +18,10 @@ public class PhoneDataSetDAO {
         dbServiceHibernate.saveOrUpdate(phoneDataSet);
     }
 
+    public void delete(PhoneDataSet phoneDataSet){
+        dbServiceHibernate.delete(phoneDataSet);
+    }
+
     public PhoneDataSet load(long id){
         return dbServiceHibernate.load(PhoneDataSet.class, id);
     }

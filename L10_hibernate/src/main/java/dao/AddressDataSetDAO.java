@@ -18,6 +18,10 @@ public class AddressDataSetDAO {
         dbServiceHibernate.saveOrUpdate(addressDataSet);
     }
 
+    public void delete(AddressDataSet addressDataSet){
+        dbServiceHibernate.delete(addressDataSet);
+    }
+
     public AddressDataSet load(long id){
         return dbServiceHibernate.load(AddressDataSet.class, id);
     }

@@ -1,8 +1,6 @@
 package dataset;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by carapooh on 16.09.2017.
@@ -12,7 +10,10 @@ import javax.persistence.Table;
 @Table(name = "phonedataset")
 public class PhoneDataSet extends DataSet {
 
-    @Column
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserDataSet user;
+
     private String number;
 
     public PhoneDataSet(){super();}
@@ -20,5 +21,17 @@ public class PhoneDataSet extends DataSet {
     public PhoneDataSet(long id, String number){
         setId(id);
         this.number = number;
+    }
+
+    public void setUser(UserDataSet user){
+        this.user = user;
+    }
+
+    public UserDataSet getUser(){
+        return user;
+    }
+
+    public String getNumber(){
+        return number;
     }
 }

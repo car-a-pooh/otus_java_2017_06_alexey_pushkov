@@ -20,9 +20,9 @@ public class HibernateHelper {
         configuration.setProperty("hibernate.connection.username", "carapooh");
         configuration.setProperty("hibernate.show_sql", "true");
         configuration.setProperty("hibernate.hbm2ddl.auto", "validate");
+        configuration.addAnnotatedClass(dataset.UserDataSet.class);
         configuration.addAnnotatedClass(dataset.AddressDataSet.class);
         configuration.addAnnotatedClass(dataset.PhoneDataSet.class);
-        configuration.addAnnotatedClass(dataset.UserDataSet.class);
 
         return configuration;
     }

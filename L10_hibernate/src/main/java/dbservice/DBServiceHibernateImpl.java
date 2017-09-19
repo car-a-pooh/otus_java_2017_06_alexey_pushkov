@@ -27,6 +27,14 @@ public class DBServiceHibernateImpl implements DBService {
         }
     }
 
+    public void delete(DataSet dataSet){
+        try(Session session = HibernateHelper.getSessionFactory().openSession()) {
+            Transaction transaction = session.beginTransaction();
+            session.delete(dataSet);
+            transaction.commit();
+        }
+    }
+
     @Override
     public <T extends DataSet> T load(Class<T> klass, long id) {
         try(Session session = HibernateHelper.getSessionFactory().openSession()) {
