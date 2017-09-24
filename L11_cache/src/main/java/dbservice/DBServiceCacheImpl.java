@@ -38,7 +38,9 @@ public class DBServiceCacheImpl extends DBServiceHibernateImpl {
             return (T) element.getValue().get();
         }
         else {
-            return super.load(klass, id);
+            T dataSet = super.load(klass, id);
+            cacheEngine.put(dataSet.getId(), new SoftReferenceCacheElement<>(dataSet, cacheEngine.getCurrentTime()));
+            return dataSet;
         }
     }
 }
