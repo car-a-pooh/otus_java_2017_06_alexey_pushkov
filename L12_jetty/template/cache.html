@@ -1,0 +1,20 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Cache</title>
+    <script>
+        function refresh() {
+            location.reload();
+        }
+    </script>
+</head>
+<body onload='setInterval(function(){refresh()}, ${refreshPeriod} )'>
+    <div class="top">
+        <img src="np.jfif"/>
+        <br/>
+    </div>
+    <p>Size: ${size}</p>
+    <p>Hits: ${hits}</p>
+    <p>Misses: ${misses}</p>
+</body>
+</html>
