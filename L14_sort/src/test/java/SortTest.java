@@ -11,8 +11,8 @@ public class SortTest {
 
         double[] a = {.2, .3, .5, .4, .7, .6, .1, .9};
 
-        Sort4Threads sort4Threads = new Sort4Threads();
-        sort4Threads.sort(a);
+        SortNThreads sortNThreads = new SortNThreads();
+        sortNThreads.sort(a, 4);
 
         Assert.assertTrue(a[2] == .3);
         Assert.assertTrue(a[0] == .1);
