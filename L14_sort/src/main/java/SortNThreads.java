@@ -19,6 +19,8 @@ public class SortNThreads {
             for (int i = 0; i < threadNumber; i++) {
                 threads[i].setName("thread " + i);
                 threads[i].start();
+            }
+            for (int i = 0; i < threadNumber; i++){
                 threads[i].join();
             }
         } catch (InterruptedException e) {
